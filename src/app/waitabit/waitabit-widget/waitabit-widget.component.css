@@ -1,0 +1,174 @@
+
+.classLeft
+{
+text-align: left;
+width: 100%;
+}
+.classDisplay
+{
+  display: none;
+}
+
+.classCenter
+{
+  text-align: center;
+  width: 100%;
+  
+}
+.widgetForm
+{
+  background-color: transparent;
+}
+.headlineText{
+  margin: 50px;
+  font-size: xx-large;
+  font-weight: 500;
+}
+  input[type=email] {
+  width:50%;
+    display: inline-block;
+    background: #f1f1f1;
+  }
+  @media only screen and (max-width: 600px) {
+    input[type=email] {
+      width:100%;
+        display: inline-block;
+        background: #f1f1f1;
+      }
+  }
+  @media only screen and (min-width: 600px) {
+     input[type=email] {
+  width:50%;
+    display: inline-block;
+    background: #f1f1f1;
+  }
+  }
+  .footer
+  {
+    font-size:14px;
+    color: #969494; 
+    
+  }
+  .footer a{
+    color: #969494;
+  }
+  .footer a:hover{
+    color: #4051B5;
+  }
+  .btn{
+    margin: 2px;
+  }  
+  .imageResize
+  {
+    width:18px;
+    height:22px;
+
+  }
+
+
+  /* Thankyou layout */
+ 
+  .thankyou-container
+  {
+    background-color: transparent;
+      height: 100%;
+      width: 100%;
+      text-align: center;
+  }
+ 
+
+  .flex-row {
+    display: flex;
+    justify-content: center;
+  }
+
+
+.waitabitLogo
+
+{
+  font-weight: 400;
+    margin: 2%;
+}
+a{
+    color: black;
+}
+
+  .copyMessage
+  {
+      margin-top: 2%;
+  }
+  .card{
+      border-radius: 1.25rem;
+   
+  }
+  .card-text
+  {
+ font-size: large;
+
+  
+  }
+  .card-no-text
+  {
+    font-size: x-large;
+    font-weight: 600;
+  }
+  .card-deck
+  {
+    margin-left: 24%;
+    margin-right: 24%;
+  }
+  input[type=text] {
+    padding:4px;
+    border-radius: 6px;
+    border-style: ridge;
+    border-color: #dedede;
+    width: 400px;
+   }
+   .description
+   {
+    font-size: larger;
+    font-weight: 500;
+    padding: 4%;
+   }
+   .social-icon-img{
+   width: 40px;
+  margin:50px 8px 4px 4px;;
+   }
+   .imageLogo
+   {
+     width:26px;
+     height: 28px;
+   }
+   @media only screen and (max-width: 600px ) {
+    .thankyou-container
+  {
+    overflow: scroll;
+      height: 650px;
+      width: 100%;
+      text-align: center;
+  }
+
+  }
+
+  @media screen and (min-width: 600px) {
+    .thankyou-container
+    {
+   
+        height: 100%;
+        width: 100%;
+        text-align: center;
+    }
+   
+  }
+  @media only screen and (max-width: 600px) {
+  
+  input[type=text] {
+    padding:4px;
+    border-radius: 6px;
+    border-style: ridge;
+    border-color: #dedede;
+    width: 60%;
+   }
+  }
+ 
+  

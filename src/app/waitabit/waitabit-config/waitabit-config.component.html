@@ -1,0 +1,114 @@
+
+<div class="container" style=" overflow:scroll;height:700px">
+<div class="waitabit-config">
+<div class="row">
+    <div class="col-4 heading">Waitlist Text</div>
+    <div class="col-3"> <input type="text" [(ngModel)]="widgetSettings.waitlistTitle" /></div>
+  </div>
+  <div class="row">
+    <div class=" col-4 heading">Primary Color</div>
+    <div class="col-3">
+      <div class="colorBox">
+        <input type="color" value="#ff0000" [(ngModel)]="widgetSettings.primaryColor">
+        {{widgetSettings.primaryColor}}
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-4 heading">Button Text</div>
+    <div class="col-3"> <input type="text" [(ngModel)]="widgetSettings.buttonText" /></div>
+  </div>
+
+  <div class="row">
+    <div class="col-4 heading"> Button position</div>
+    <div class="col-3">
+      <select class="selectBtn" #sel (change)="changed(sel.value)">
+       
+        <option value="right">Right</option>
+        <option  value="bottom">Bottom</option>
+      </select>
+    </div>
+  </div>
+
+
+
+
+    <div class="row">
+      <div class=" col-4 heading "> API Token</div>
+      <div class="col-3"> <input type="text" placeholder="YOUR-API-TOKEN" [(ngModel)]="widgetSettings.apiToken" />
+      </div>
+    </div>
+    <div class="row">
+    <div class=" col-4 heading"> Widget Position</div>
+    <div class="col-7">
+     
+        <label>
+          <input type="radio" (change)="onAlignmentItemChange($event.target.value)" checked="checked" name="radio1"  [(ngModel)]="widgetSettings.widgetPosition" value='left'>Left
+        </label>
+    
+        <label>
+          <input type="radio" (change)="onAlignmentItemChange($event.target.value)" name="radio1"  [(ngModel)]="widgetSettings.widgetPosition" value='center' >Center
+        </label>
+       
+  </div>
+  </div>
+  <hr>
+  <h6>Thank You Layout</h6>
+
+
+
+  
+  <div class="row">
+    <div class=" col-4 heading"> Thank You Title</div>
+    <div class="col-3">
+      <input type="text" [(ngModel)]="widgetSettings.thankyouTitle" />
+    </div>
+  </div>
+  <div class="row">
+    <div class=" col-4 heading">Description</div>
+    <div class="col-3">
+      <input type="text" [(ngModel)]="widgetSettings.descriptionText" />
+    </div>
+  </div>
+  <div class="row">
+  <div class=" col-4 heading">Page Display</div>
+  <div class="col-7">
+    <label>
+      <input type="radio" (change)="onItemChange($event.target.value)" checked="checked" name="radio"  [(ngModel)]="widgetSettings.pageDisplay" value='singlePage'>Single Page
+    </label>
+
+    <label>
+      <input type="radio"  name="radio"  [(ngModel)]="widgetSettings.pageDisplay" value='popup' (change)="onItemChange($event.target.value)">Popup
+    </label>
+    </div>
+ 
+</div>
+
+
+  <div class=" heading">Social Share Link</div>
+
+  <form [formGroup]="myForm">
+    <div class="form-check form-check-inline">
+
+    
+      <div *ngFor="let data of uiLinkArray">
+        <input  checked=checked class="form-check-input" type="checkbox" (change)="onChange(data, $event.target.checked)">
+        <label class="form-check-label">{{data}}</label>
+      </div>
+    </div>
+  </form>
+
+  <div style="text-align: center;" >
+    <button class="btn btn-primary" style="position: left;" type="submit"  (click)="generate()">Generate Code</button>
+  </div>
+  
+
+<hr>
+  <h6>Script</h6>
+  <p>* Place the code in your html where you want the widget to appear </p>
+<div class="card">
+  <div class="card-title"> {{scriptCode}} </div>
+</div>
+</div>

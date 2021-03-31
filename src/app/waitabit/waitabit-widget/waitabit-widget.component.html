@@ -1,0 +1,170 @@
+
+<!-- widget preview -->
+<div [ngStyle]="{ display : widgetSettings.pageDisplay === 'popup' ? '' : (!isResponse ? '' : 'none') }"
+  [ngClass]="{'classLeft': widgetSettings.widgetPosition === 'left', 'classCenter': widgetSettings.widgetPosition === 'center'  }">
+  <h5> {{widgetSettings.waitlistTitle}}</h5>
+  <div>
+    <!-- widget form -->
+    <form id="emailForm" [formGroup]="emailForm" (ngSubmit)="onSubmit(mymodal)">
+      <div class="form-group">
+        <input type="email" placeholder="Enter email address" formControlName="email" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+        <!-- widget button on right view -->
+        <button *ngIf="widgetSettings.buttonPosition === 'right'" class="btn  btn-primary" [ngStyle]="{
+            'background-color' :  widgetSettings.primaryColor,'border-color': widgetSettings.primaryColor
+           }">{{widgetSettings.buttonText}}</button>
+        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+          <div *ngIf="f.email.errors.required">Email is required</div>
+          <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+        </div>
+      </div>
+       <!-- widget button on bottom view -->
+      <div *ngIf="widgetSettings.buttonPosition === 'bottom'" class="form-group">
+        <button class="btn btn-primary" [ngStyle]="{
+              'background-color' :  widgetSettings.primaryColor,'border-color': widgetSettings.primaryColor
+            }">{{widgetSettings.buttonText}}</button>
+      </div>
+    </form>
+  </div>
+  <!-- widget powered by -->
+  <div>Widget <img class="imageResize" src="https://waitabit.dev/assets/widget-images/waitabit-logo.png"> by <a href="https://waitabit.dev/">
+      waitabit.dev
+    </a></div>
+</div>
+<!-- Thankyou container -->
+<div class="thankyou-container">
+  <!-- SinglePage -->
+  <div *ngIf="widgetSettings.pageDisplay === 'singlePage' && isResponse">
+    <div class="headlineText">{{widgetSettings.thankyouTitle}}</div>
+
+    <div class=" card-deck">
+     <!-- card for position -->
+      <div class="card ">
+        <div class="card-body text-center">
+          <p class="card-no-text" [ngStyle]="{
+          'color' :  widgetSettings.primaryColor
+        }">{{currentPosition}}</p>
+          <p class="card-text">Current Position</p>
+        </div>
+      </div>
+       <!-- card for referred -->
+      <div class="card">
+        <div class="card-body text-center">
+          <p class="card-no-text" [ngStyle]="{
+          'color' :  widgetSettings.primaryColor
+        }">{{noFriendsReferred}}</p>
+          <p class="card-text">Friends Referred</p>
+        </div>
+      </div>
+    </div>
+   <!-- description text -->
+    <div class="description">{{widgetSettings.descriptionText}}
+    </div>
+   <!-- copy button -->
+    
+    <input type="text" [(ngModel)]='copyLink' id="copyLink" name="copyLink" #copyinput>
+    <button class="btn btn-primary" [ngStyle]="{
+              'background-color' :  widgetSettings.primaryColor,'border-color': widgetSettings.primaryColor
+            }" type="submit"  (click)="copyInputMessage(copyinput)" >{{copyText}}</button>
+           
+             
+   <!-- socialshare container -->
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <a [ngStyle]="{ 'display' : (widgetSettings.socialShareLink.includes('Facebook')) ? '' : 'none' }"
+            id="facebookLink" target="_blank" [href]=facebookLink><img class="social-icon-img"
+              src="https://waitabit.dev/assets/widget-images/social-icon/Facebook.svg" /></a>
+          <a [ngStyle]="{ 'display' : (widgetSettings.socialShareLink.includes('Twitter')) ? '' : 'none' }"
+            id="twitterLink" target="_blank" [href]=twitterLink><img class="social-icon-img"
+              src="https://waitabit.dev/assets/widget-images/social-icon/Twitter.svg" /></a>
+          <a [ngStyle]="{ 'display' : (widgetSettings.socialShareLink.includes('Linkedin')) ? '' : 'none' }"
+            id="linkedinLink" target="_blank" [href]=linkedinLink><img class="social-icon-img"
+              src="https://waitabit.dev/assets/widget-images/social-icon/LinkedIn.svg" /></a>
+          <a [ngStyle]="{ 'display' : (widgetSettings.socialShareLink.includes('Email')) ? '' : 'none' }" id="emailLink"
+            target="_blank" [href]=emailLink><img class="social-icon-img"
+              src="https://waitabit.dev/assets/widget-images/social-icon/Email.svg" /></a>
+          <a [ngStyle]="{ 'display' : (widgetSettings.socialShareLink.includes('Telegram')) ? '' : 'none' }"
+            id="telegramLink" target="_blank" [href]=chatLink><img class="social-icon-img"
+              src="https://waitabit.dev/assets/widget-imagessocial-icon/Telegram.svg" /></a>
+        </div>
+      </div>
+    </div>
+    <!-- poweredby -->
+    <div class="waitabitLogo">
+      <a href="https://waitabit.dev/">
+        Powered by<br>
+        <img class="imageLogo" src="https://waitabit.dev/assets/widget-images/waitabit-logo.png">
+      </a>
+    </div>
+  </div>
+
+<!-- open model  -->
+  <ng-template #mymodal let-modal>
+    <div class="modal-body">
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <div class="thankyou-container">
+        <div class="headlineText">{{widgetSettings.thankyouTitle}}</div>
+        <div class=" card-deck">
+          <div class="card ">
+            <div class="card-body text-center">
+              <p class="card-no-text" [ngStyle]="{
+            'color' :widgetSettings.primaryColor
+          }">{{currentPosition}}</p>
+              <p class="card-text">Current Position</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body text-center">
+              <p class="card-no-text" [ngStyle]="{
+            'color':widgetSettings.primaryColor
+          }">{{noFriendsReferred}}</p>
+              <p class="card-text">Friends Referred</p>
+            </div>
+          </div>
+        </div>
+        <div class="description">{{widgetSettings.descriptionText}}
+        </div>
+      
+        <input type="text" [(ngModel)]='copyLink' id="copyLink" name="copyLink" #copyinput>
+        <button class="btn btn-primary"  [ngStyle]="{
+                'background-color' :  widgetSettings.primaryColor,'border-color': widgetSettings.primaryColor
+              }" type="submit"  (click)="copyInputMessage(copyinput)">{{copyText}}</button>
+
+    
+      <div class="container">
+
+          <div class="row">
+            <div class="col">
+              <a [ngStyle]="{ 'display' : (widgetSettings.socialShareLink.includes('Facebook')) ? '' : 'none' }"
+                id="facebookLink" target="_blank" [href]=facebookLink><img class="social-icon-img"
+                  src="https://waitabit.dev/assets/widget-images/social-icon/Facebook.svg" /></a>
+              <a [ngStyle]="{ 'display' : (widgetSettings.socialShareLink.includes('Twitter')) ? '' : 'none' }"
+                id="twitterLink" target="_blank" [href]=twitterLink><img class="social-icon-img"
+                  src="https://waitabit.dev/assets/widget-images/social-icon/Twitter.svg" /></a>
+              <a [ngStyle]="{ 'display' : (widgetSettings.socialShareLink.includes('Linkedin')) ? '' : 'none' }"
+                id="linkedinLink" target="_blank" [href]=linkedinLink><img class="social-icon-img"
+                  src="https://waitabit.dev/assets/widget-images/social-icon/LinkedIn.svg" /></a>
+              <a [ngStyle]="{ 'display' : (widgetSettings.socialShareLink.includes('Email')) ? '' : 'none' }"
+                id="emailLink" target="_blank" [href]=emailLink><img class="social-icon-img"
+                  src="https://waitabit.dev/assets/widget-images/social-icon/Email.svg" /></a>
+              <a [ngStyle]="{ 'display' : (widgetSettings.socialShareLink.includes('Telegram')) ? '' : 'none' }"
+                id="telegramLink" target="_blank" [href]=chatLink><img class="social-icon-img"
+                  src="https://waitabit.dev/assets/widget-images/social-icon/Telegram.svg" /></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="waitabitLogo">
+          <a href="https://waitabit.dev/">
+            Powered by<br>
+            <img class="imageLogo" src="/assets/waitabit-logo.png">
+          </a>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+</div>
