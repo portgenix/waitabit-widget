@@ -48,6 +48,7 @@ export class WaitabitWidgetComponent implements OnInit, OnChanges {
   public email: string = "";
   public message: string = "";
   public isResponse: boolean = false;
+  public errorMessage: string = "";
   public selectedPos=this.widgetposition;
   //Thankyoupage 
   public currentPosition: number ;
@@ -82,7 +83,7 @@ export class WaitabitWidgetComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    console.log("Coming here when the view is init", this.title)
+   
       this.emailForm = this.formBuilder.group({
         email: ['', [Validators.required, Validators.email]],
       }
@@ -90,10 +91,7 @@ export class WaitabitWidgetComponent implements OnInit, OnChanges {
     
   }
 
-  ngAfterViewInit() {
-    console.log("Coming here after the view", this.title)
-    this.ref.detectChanges();  
-  }
+ 
 
 
   // convenience getter for easy access to form fields
@@ -135,6 +133,10 @@ export class WaitabitWidgetComponent implements OnInit, OnChanges {
           (error) => {
             this.message = error.error.message
             console.log(error);
+            if(error.error="Invalid Token")
+            {
+              this.errorMessage ="API Token Missing"
+            }
             this.isResponse=false;
           }
         );

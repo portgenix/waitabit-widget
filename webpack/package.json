@@ -1,6 +1,6 @@
 {
   "name": "waitabit-api",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Waitabit widget module",
   "main": "app.js",
   "dependencies": {},
