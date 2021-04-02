@@ -1,31 +1,31 @@
 
 <div class="container" style=" overflow:scroll;height:700px">
 <div class="waitabit-config">
-<div class="row">
+     <div class="row">
     <div class="col-4 heading">Waitlist Text</div>
-    <div class="col-3"> <input type="text" [(ngModel)]="widgetSettings.waitlistTitle" /></div>
-  </div>
+    <div class="col-3"> <input type="text" [(ngModel)]="title" (ngModelChange)="titleChanged($event)" /></div>
+  </div> 
+
   <div class="row">
     <div class=" col-4 heading">Primary Color</div>
     <div class="col-3">
       <div class="colorBox">
-        <input type="color" value="#ff0000" [(ngModel)]="widgetSettings.primaryColor">
-        {{widgetSettings.primaryColor}}
+        <input type="color" value="#ff0000" [(ngModel)]="color" (ngModelChange)="colorChanged($event)">
+        {{color}}
       </div>
     </div>
   </div>
-
-
   <div class="row">
     <div class="col-4 heading">Button Text</div>
-    <div class="col-3"> <input type="text" [(ngModel)]="widgetSettings.buttonText" /></div>
-  </div>
+    <div class="col-3"> <input type="text" [(ngModel)]="buttontext" (ngModelChange)="buttontextChanged($event)" /></div>
+  </div> 
+
+
 
   <div class="row">
     <div class="col-4 heading"> Button position</div>
     <div class="col-3">
-      <select class="selectBtn" #sel (change)="changed(sel.value)">
-       
+      <select class="selectBtn" #sel (change)="buttonpositionchanged(sel.value)">
         <option value="right">Right</option>
         <option  value="bottom">Bottom</option>
       </select>
@@ -37,7 +37,7 @@
 
     <div class="row">
       <div class=" col-4 heading "> API Token</div>
-      <div class="col-3"> <input type="text" placeholder="YOUR-API-TOKEN" [(ngModel)]="widgetSettings.apiToken" />
+      <div class="col-3"> <input type="text" [(ngModel)]="apitoken" (ngModelChange)="apitokenChanged($event)" />
       </div>
     </div>
     <div class="row">
@@ -45,11 +45,11 @@
     <div class="col-7">
      
         <label>
-          <input type="radio" (change)="onAlignmentItemChange($event.target.value)" checked="checked" name="radio1"  [(ngModel)]="widgetSettings.widgetPosition" value='left'>Left
+          <input type="radio" (change)="widgetpositionChanged($event.target.value)" checked="checked" name="radio1"  [(ngModel)]="widgetposition" value='left'>Left
         </label>
     
         <label>
-          <input type="radio" (change)="onAlignmentItemChange($event.target.value)" name="radio1"  [(ngModel)]="widgetSettings.widgetPosition" value='center' >Center
+          <input type="radio" (change)="widgetpositionChanged($event.target.value)" name="radio1"  [(ngModel)]="widgetposition" value='center'>Center
         </label>
        
   </div>
@@ -63,24 +63,25 @@
   <div class="row">
     <div class=" col-4 heading"> Thank You Title</div>
     <div class="col-3">
-      <input type="text" [(ngModel)]="widgetSettings.thankyouTitle" />
+    <input type="text" [(ngModel)]="thankmsg" (ngModelChange)="thankmsgChanged($event)"  />
     </div>
   </div>
+
   <div class="row">
     <div class=" col-4 heading">Description</div>
     <div class="col-3">
-      <input type="text" [(ngModel)]="widgetSettings.descriptionText" />
+      <input type="text" [(ngModel)]="desctext" (ngModelChange)="desctextChanged($event)" />
     </div>
   </div>
   <div class="row">
   <div class=" col-4 heading">Page Display</div>
   <div class="col-7">
     <label>
-      <input type="radio" (change)="onItemChange($event.target.value)" checked="checked" name="radio"  [(ngModel)]="widgetSettings.pageDisplay" value='singlePage'>Single Page
+      <input type="radio" (change)="pagedisplayChanged($event.target.value)" checked="checked" name="radio"  [(ngModel)]="pagedisplay" value='singlePage'>Single Page
     </label>
 
     <label>
-      <input type="radio"  name="radio"  [(ngModel)]="widgetSettings.pageDisplay" value='popup' (change)="onItemChange($event.target.value)">Popup
+      <input type="radio"  name="radio"  [(ngModel)]="pagedisplay" value='popup' (change)="pagedisplayChanged($event.target.value)">Popup
     </label>
     </div>
  

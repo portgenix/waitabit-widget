@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, Input, OnInit, ViewChild } from '@angular/core'
+import { ChangeDetectorRef, Component, Directive, ElementRef, EventEmitter, HostListener, Input, OnChanges, OnInit, SimpleChanges, ViewChild, ViewEncapsulation } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 
 import { fadeIn, fadeInOut } from '../animations'
@@ -6,37 +6,49 @@ import { fadeIn, fadeInOut } from '../animations'
 import { RestService } from "../../services/rest.service";
 
 import {NgbModal, NgbModalOptions} from '@ng-bootstrap/ng-bootstrap';
+import { Output } from '@angular/core';
 
 @Component({
   selector: 'waitabit-widget',
   templateUrl: './waitabit-widget.component.html',
   styleUrls: ['./waitabit-widget.component.css'],
   animations: [fadeInOut, fadeIn],
+  encapsulation: ViewEncapsulation.Emulated
 })
-export class WaitabitWidgetComponent implements OnInit {
-
+export class WaitabitWidgetComponent implements OnInit, OnChanges {
+  @Input() title ='';
+  @Input() color ='#4050b5';
+  @Input() buttontext ='Join Waitlist';
+  @Input() buttonposition ='right';
+  @Input() apitoken ='<Your-API-Token>';
+  @Input() widgetposition ='left';
+  @Input() thankmsg ='Thanks for joining the waitlist';
+  @Input() desctext ='Want to move up in line and get access earlier? Skip ahead by referring friends!';
+  @Input() pagedisplay ='singlePage';
+  @Input() sharelinks:["Facebook","Twitter","Linkedin","Email","Telegram"];
 
   @Input() copyText = 'Copy';
-    
-  @Input() public  widgetSettings = {
-    waitlistTitle:'Get Early Access',
-    primaryColor: 'blue',
-    buttonText: 'Join Waitlist!',
-    buttonPosition:'right',
-    apiToken : '<YOUR-API-TOKEN-HERE>',
-    pageDisplay:'popup',
-    thankyouTitle:'Thanks for joining the waitlist',
-    widgetPosition:'left',
-    descriptionText:'',
-    socialShareLink:["Facebook","Twitter","Linkedin","Email"],
-  };
+  @Output() response = new EventEmitter<string>();
 
-  //@Input() public src = `<waitabit-widget id="widget" [title]=`+ this.widgetSettings.waitlistTitle + `</waitabit-widget>`
+  /*@Input() public  widgetSettings = {
+    title:'Get Early Access',
+    color: 'blue',
+    buttontext: 'Join Waitlist!',
+    buttonposition:'right',
+    apitoken : '<YOUR-API-TOKEN-HERE>',
+    pagedisplay:'popup',
+    thankmsg:'Thanks for joining the waitlist',
+    widgetposition:'left',
+    desctext:'',
+    sharelinks:["Facebook","Twitter","Linkedin","Email"],
+  };*/
+
+  //@Input() public src = `<waitabit-widget id="widget" [title]=`+ this.widgetSettings.title + `</waitabit-widget>`
   public current_url: string = "";
   public email: string = "";
   public message: string = "";
   public isResponse: boolean = false;
-  public selectedPos=this.widgetSettings.widgetPosition;
+  public selectedPos=this.widgetposition;
   //Thankyoupage 
   public currentPosition: number ;
   public noFriendsReferred: number;
@@ -53,11 +65,16 @@ export class WaitabitWidgetComponent implements OnInit {
   submitted = false;
   modalOptions:NgbModalOptions;
 
-  constructor(private modalService: NgbModal,private formBuilder: FormBuilder, private restService: RestService) { 
+  constructor(private ref: ChangeDetectorRef, private elementRef: ElementRef, private modalService: NgbModal,private formBuilder: FormBuilder, private restService: RestService) { 
     this.modalOptions = {
       size:'lg'
-      
      }
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.title) {
+      console.log("Changes detected in title", this.title)
+      this.response.emit(this.title);
+    }
   }
 
   emailsMatchValidator(form: FormGroup) {
@@ -65,11 +82,19 @@ export class WaitabitWidgetComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.emailForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-    }
+    console.log("Coming here when the view is init", this.title)
+      this.emailForm = this.formBuilder.group({
+        email: ['', [Validators.required, Validators.email]],
+      }
     );
+    
   }
+
+  ngAfterViewInit() {
+    console.log("Coming here after the view", this.title)
+    this.ref.detectChanges();  
+  }
+
 
   // convenience getter for easy access to form fields
   get f() { return this.emailForm.controls; }
@@ -89,7 +114,7 @@ export class WaitabitWidgetComponent implements OnInit {
       }
 
       this.restService
-        .post(this.widgetSettings.apiToken, payload)
+        .post(this.apitoken, payload)
         .subscribe(
           (data: any) => {
             console.log(data)
@@ -103,7 +128,7 @@ export class WaitabitWidgetComponent implements OnInit {
             this.chatLink= "https://telegram.me/share/url?url="+encodeURI(data.share_links.chat);
      
             this.isResponse=true;
-              if(this.isResponse && this.widgetSettings.pageDisplay=="popup"){
+              if(this.isResponse && this.pagedisplay=="popup"){
                 this.modalService.open(content, this.modalOptions)
               } 
           },

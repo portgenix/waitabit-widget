@@ -6,7 +6,7 @@ import { ElementModule } from './element.module'
 import { AppComponent } from './app.component'
 
 @NgModule({
-  imports: [BrowserModule, BrowserAnimationsModule, ElementModule,NgbModule],
+  imports: [BrowserModule, BrowserAnimationsModule, ElementModule, NgbModule],
   declarations: [AppComponent],
   bootstrap: [AppComponent],
 })

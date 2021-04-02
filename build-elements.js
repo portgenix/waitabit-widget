@@ -1,6 +1,9 @@
 const fs = require('fs-extra');
 const concat = require('concat');
+const ConcatPlugin = require('webpack-concat-plugin');
+ 
 
+ 
 const target = process.argv.slice(2) || 'es2015';
 
 (async function build() {
@@ -17,8 +20,11 @@ const target = process.argv.slice(2) || 'es2015';
 
   await concat(files, './dist/elements/waitabit-widget.js')
 
+
   await fs.copy('./demo.html', './dist/elements/index.html')
-  await fs.copy('./waitabit-logo.png', './dist/elements/waitabit-logo.png')
+  await fs.copy('./demo.html', './dist/elements/index.html')
+  //await fs.copy('./waitabit-logo.png', './dist/elements/waitabit-logo.png')
+
   console.info('Elements created successfully!')
 
 })()

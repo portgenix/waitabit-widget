@@ -5,17 +5,17 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class RestService {
-  apiToken: any;
+  apitoken: any;
   url: string; 
 
   constructor(private http: HttpClient) {
   }
 
 
-  post(apiToken,payload: any) {
+  post(apitoken,payload: any) {
     this.url="https://api.waitabit.dev/waitlist"
     return this.http.post(this.url, payload, {
-      headers: new HttpHeaders({ 'x-api-token': apiToken })
+      headers: new HttpHeaders({ 'x-api-token': apitoken })
      });
 
   }

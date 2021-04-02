@@ -5,7 +5,7 @@
   "projects": {
     "elements": {
       "root": "",
-      "sourceRoot": "/src",
+      "sourceRoot": "src",
       "projectType": "application",
       "architect": {
         "build": {
@@ -53,7 +53,7 @@
             "aot": true,
             "outputPath": "dist/waitabit-widget",
             "index": "src/index.html",
-            "main": "src/main.ts",
+            "main": "src/main.element.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
@@ -69,7 +69,8 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": []
           },

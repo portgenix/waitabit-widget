@@ -13,8 +13,8 @@ import { WaitabitConfigComponent } from './waitabit-config/waitabit-config.compo
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule],
-  declarations: [ WaitabitWidgetComponent, WaitabitConfigComponent],
-  exports: [WaitabitWidgetComponent, WaitabitConfigComponent],
-  entryComponents: [WaitabitWidgetComponent, WaitabitConfigComponent],
+  //declarations: [ WaitabitWidgetComponent, WaitabitConfigComponent],
+  //exports: [WaitabitWidgetComponent, WaitabitConfigComponent],
+  //entryComponents: [WaitabitWidgetComponent, WaitabitConfigComponent],
 })
 export class WaitabitModule {}

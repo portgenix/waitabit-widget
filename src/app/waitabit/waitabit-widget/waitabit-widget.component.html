@@ -1,8 +1,9 @@
 
 <!-- widget preview -->
-<div [ngStyle]="{ display : widgetSettings.pageDisplay === 'popup' ? '' : (!isResponse ? '' : 'none') }"
-  [ngClass]="{'classLeft': widgetSettings.widgetPosition === 'left', 'classCenter': widgetSettings.widgetPosition === 'center'  }">
-  <h5> {{widgetSettings.waitlistTitle}}</h5>
+<div [ngStyle]="{ display : pagedisplay === 'popup' ? '' : (!isResponse ? '' : 'none') }"
+  [ngClass]="{'classLeft': widgetposition === 'left', 'classCenter': widgetposition === 'center'  }">
+
+  <h5>{{title}}</h5>
   <div>
     <!-- widget form -->
     <form id="emailForm" [formGroup]="emailForm" (ngSubmit)="onSubmit(mymodal)">
@@ -10,19 +11,19 @@
         <input type="email" placeholder="Enter email address" formControlName="email" class="form-control"
           [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
         <!-- widget button on right view -->
-        <button *ngIf="widgetSettings.buttonPosition === 'right'" class="btn  btn-primary" [ngStyle]="{
-            'background-color' :  widgetSettings.primaryColor,'border-color': widgetSettings.primaryColor
-           }">{{widgetSettings.buttonText}}</button>
+        <button *ngIf="buttonposition === 'right'" class="btn  btn-primary" [ngStyle]="{
+            'background-color' : color,'border-color': color
+           }">{{buttontext}}</button>
         <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
           <div *ngIf="f.email.errors.required">Email is required</div>
           <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
         </div>
       </div>
        <!-- widget button on bottom view -->
-      <div *ngIf="widgetSettings.buttonPosition === 'bottom'" class="form-group">
+      <div *ngIf="buttonposition === 'bottom'" class="form-group">
         <button class="btn btn-primary" [ngStyle]="{
-              'background-color' :  widgetSettings.primaryColor,'border-color': widgetSettings.primaryColor
-            }">{{widgetSettings.buttonText}}</button>
+              'background-color' : color,'border-color': color
+            }">{{buttontext}}</button>
       </div>
     </form>
   </div>
@@ -34,15 +35,15 @@
 <!-- Thankyou container -->
 <div class="thankyou-container">
   <!-- SinglePage -->
-  <div *ngIf="widgetSettings.pageDisplay === 'singlePage' && isResponse">
-    <div class="headlineText">{{widgetSettings.thankyouTitle}}</div>
+  <div *ngIf="pagedisplay === 'singlePage' && isResponse">
+    <div class="headlineText">{{thankmsg}}</div>
 
     <div class=" card-deck">
      <!-- card for position -->
       <div class="card ">
         <div class="card-body text-center">
           <p class="card-no-text" [ngStyle]="{
-          'color' :  widgetSettings.primaryColor
+          'color' : color
         }">{{currentPosition}}</p>
           <p class="card-text">Current Position</p>
         </div>
@@ -51,20 +52,20 @@
       <div class="card">
         <div class="card-body text-center">
           <p class="card-no-text" [ngStyle]="{
-          'color' :  widgetSettings.primaryColor
+          'color' : color
         }">{{noFriendsReferred}}</p>
           <p class="card-text">Friends Referred</p>
         </div>
       </div>
     </div>
    <!-- description text -->
-    <div class="description">{{widgetSettings.descriptionText}}
+    <div class="description">{{desctext}}
     </div>
    <!-- copy button -->
     
     <input type="text" [(ngModel)]='copyLink' id="copyLink" name="copyLink" #copyinput>
     <button class="btn btn-primary" [ngStyle]="{
-              'background-color' :  widgetSettings.primaryColor,'border-color': widgetSettings.primaryColor
+              'background-color' :  color,'border-color': color
             }" type="submit"  (click)="copyInputMessage(copyinput)" >{{copyText}}</button>
            
              
@@ -72,21 +73,21 @@
     <div class="container">
       <div class="row">
         <div class="col">
-          <a [ngStyle]="{ 'display' : (widgetSettings.socialShareLink.includes('Facebook')) ? '' : 'none' }"
+          <a [ngStyle]="{ 'display' : (sharelinks.includes('Facebook')) ? '' : 'none' }"
             id="facebookLink" target="_blank" [href]=facebookLink><img class="social-icon-img"
               src="https://waitabit.dev/assets/widget-images/social-icon/Facebook.svg" /></a>
-          <a [ngStyle]="{ 'display' : (widgetSettings.socialShareLink.includes('Twitter')) ? '' : 'none' }"
+          <a [ngStyle]="{ 'display' : (sharelinks.includes('Twitter')) ? '' : 'none' }"
             id="twitterLink" target="_blank" [href]=twitterLink><img class="social-icon-img"
               src="https://waitabit.dev/assets/widget-images/social-icon/Twitter.svg" /></a>
-          <a [ngStyle]="{ 'display' : (widgetSettings.socialShareLink.includes('Linkedin')) ? '' : 'none' }"
+          <a [ngStyle]="{ 'display' : (sharelinks.includes('Linkedin')) ? '' : 'none' }"
             id="linkedinLink" target="_blank" [href]=linkedinLink><img class="social-icon-img"
               src="https://waitabit.dev/assets/widget-images/social-icon/LinkedIn.svg" /></a>
-          <a [ngStyle]="{ 'display' : (widgetSettings.socialShareLink.includes('Email')) ? '' : 'none' }" id="emailLink"
+          <a [ngStyle]="{ 'display' : (sharelinks.includes('Email')) ? '' : 'none' }" id="emailLink"
             target="_blank" [href]=emailLink><img class="social-icon-img"
               src="https://waitabit.dev/assets/widget-images/social-icon/Email.svg" /></a>
-          <a [ngStyle]="{ 'display' : (widgetSettings.socialShareLink.includes('Telegram')) ? '' : 'none' }"
+          <a [ngStyle]="{ 'display' : (sharelinks.includes('Telegram')) ? '' : 'none' }"
             id="telegramLink" target="_blank" [href]=chatLink><img class="social-icon-img"
-              src="https://waitabit.dev/assets/widget-imagessocial-icon/Telegram.svg" /></a>
+              src="https://waitabit.dev/assets/widget-images/social-icon/Telegram.svg" /></a>
         </div>
       </div>
     </div>
@@ -106,12 +107,12 @@
         <span aria-hidden="true">&times;</span>
       </button>
       <div class="thankyou-container">
-        <div class="headlineText">{{widgetSettings.thankyouTitle}}</div>
+        <div class="headlineText">{{thankmsg}}</div>
         <div class=" card-deck">
           <div class="card ">
             <div class="card-body text-center">
               <p class="card-no-text" [ngStyle]="{
-            'color' :widgetSettings.primaryColor
+            'color' :color
           }">{{currentPosition}}</p>
               <p class="card-text">Current Position</p>
             </div>
@@ -119,18 +120,18 @@
           <div class="card">
             <div class="card-body text-center">
               <p class="card-no-text" [ngStyle]="{
-            'color':widgetSettings.primaryColor
+            'color':color
           }">{{noFriendsReferred}}</p>
               <p class="card-text">Friends Referred</p>
             </div>
           </div>
         </div>
-        <div class="description">{{widgetSettings.descriptionText}}
+        <div class="description">{{desctext}}
         </div>
       
         <input type="text" [(ngModel)]='copyLink' id="copyLink" name="copyLink" #copyinput>
         <button class="btn btn-primary"  [ngStyle]="{
-                'background-color' :  widgetSettings.primaryColor,'border-color': widgetSettings.primaryColor
+                'background-color' :  color,'border-color': color
               }" type="submit"  (click)="copyInputMessage(copyinput)">{{copyText}}</button>
 
     
@@ -138,19 +139,19 @@
 
           <div class="row">
             <div class="col">
-              <a [ngStyle]="{ 'display' : (widgetSettings.socialShareLink.includes('Facebook')) ? '' : 'none' }"
+              <a [ngStyle]="{ 'display' : (sharelinks.includes('Facebook')) ? '' : 'none' }"
                 id="facebookLink" target="_blank" [href]=facebookLink><img class="social-icon-img"
                   src="https://waitabit.dev/assets/widget-images/social-icon/Facebook.svg" /></a>
-              <a [ngStyle]="{ 'display' : (widgetSettings.socialShareLink.includes('Twitter')) ? '' : 'none' }"
+              <a [ngStyle]="{ 'display' : (sharelinks.includes('Twitter')) ? '' : 'none' }"
                 id="twitterLink" target="_blank" [href]=twitterLink><img class="social-icon-img"
                   src="https://waitabit.dev/assets/widget-images/social-icon/Twitter.svg" /></a>
-              <a [ngStyle]="{ 'display' : (widgetSettings.socialShareLink.includes('Linkedin')) ? '' : 'none' }"
+              <a [ngStyle]="{ 'display' : (sharelinks.includes('Linkedin')) ? '' : 'none' }"
                 id="linkedinLink" target="_blank" [href]=linkedinLink><img class="social-icon-img"
                   src="https://waitabit.dev/assets/widget-images/social-icon/LinkedIn.svg" /></a>
-              <a [ngStyle]="{ 'display' : (widgetSettings.socialShareLink.includes('Email')) ? '' : 'none' }"
+              <a [ngStyle]="{ 'display' : (sharelinks.includes('Email')) ? '' : 'none' }"
                 id="emailLink" target="_blank" [href]=emailLink><img class="social-icon-img"
                   src="https://waitabit.dev/assets/widget-images/social-icon/Email.svg" /></a>
-              <a [ngStyle]="{ 'display' : (widgetSettings.socialShareLink.includes('Telegram')) ? '' : 'none' }"
+              <a [ngStyle]="{ 'display' : (sharelinks.includes('Telegram')) ? '' : 'none' }"
                 id="telegramLink" target="_blank" [href]=chatLink><img class="social-icon-img"
                   src="https://waitabit.dev/assets/widget-images/social-icon/Telegram.svg" /></a>
             </div>
